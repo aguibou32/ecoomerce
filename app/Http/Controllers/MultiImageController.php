@@ -28,26 +28,20 @@ class MultiImageController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
-            'image' => ['required'],
-       ]);
-       
-        $multi_images = request('image');
-        
+        foreach(request('image') as $image){
 
-       foreach($multi_images as $image){
-        
-            $image = new MultiPicture;
+            $multi_image = new MultiPicture;
 
-            $image->brand_name = request('brand_name');
-            $brand->brand_image = request('brand_image')->store('/images/brand images', 'public');
+            $file_name = $image->getClientOriginalName();
 
-            $brand->save();
+            $multi_image->image = $image->store('/images/multi images', 'public');
+            $multi_image->save();
 
-            $image = Image::make(public_path('storage/' . $brand->brand_image))->fit(300,200);
+            $image = Image::make(public_path('storage/' . $multi_image->image))->fit(300,200);
             $image->save();
+        }
 
-       }
+        return redirect()->back();
 
     }
 

@@ -16,13 +16,12 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                 </div>
-
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('category.index') }}" :active="request()->routeIs('category.index')">
-                        {{ __('Product Categories') }}
+                        {{ __('Categories') }}
                     </x-jet-nav-link>
                 </div>
-
+                
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('brand.index') }}" :active="request()->routeIs('brand.index')">
                         {{ __('Brands') }}
@@ -31,9 +30,10 @@
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('multi_image.index') }}" :active="request()->routeIs('multi_image.index')">
-                        {{ __('Multi images') }}
+                        {{ __('Multi Images') }}
                     </x-jet-nav-link>
                 </div>
+
             </div>
 
             <!-- Settings Dropdown -->

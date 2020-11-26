@@ -23,29 +23,25 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('contact', ContactController::class);
+Route::middleware(['auth'])->group(function () {
+    // Product Category
+    Route::resource('category', CategoryController::class);
+    Route::get('/restoreCategory/{id}', [CategoryController::class, 'restoreCategory'])->name('restoreCategory');
+    Route::get('/moveAllCategoriesToBin', [CategoryController::class, 'moveAllCategoriesToBin'])->name('moveAllCategoriesToBin');
+    Route::get('/deleteCategoryPermanently/{id}', [CategoryController::class, 'deleteCategoryPermanently'])->name('deleteCategoryPermanently');
+    Route::get('/deleteAllCategoriesPermanently', [CategoryController::class, 'deleteAllCategoryPermanently'])->name('deleteAllCategoriesPermanently');
+    Route::get('/restoreAllCategories', [CategoryController::class, 'restoreAllCategories'])->name('restoreAllCategories');
 
-// Product Category
-Route::resource('category', CategoryController::class);
-Route::get('/restoreCategory/{id}', [CategoryController::class, 'restoreCategory'])->name('restoreCategory');
-Route::get('/moveAllCategoriesToBin', [CategoryController::class, 'moveAllCategoriesToBin'])->name('moveAllCategoriesToBin');
-Route::get('/deleteCategoryPermanently/{id}', [CategoryController::class, 'deleteCategoryPermanently'])->name('deleteCategoryPermanently');
-Route::get('/deleteAllCategoriesPermanently', [CategoryController::class, 'deleteAllCategoryPermanently'])->name('deleteAllCategoriesPermanently');
-Route::get('/restoreAllCategories', [CategoryController::class, 'restoreAllCategories'])->name('restoreAllCategories');
+    // Brand routes
+    Route::resource('brand', BrandController::class);
 
-// Brand routes
-Route::resource('brand', BrandController::class);
-
-// Multi Image for the brand 
-Route::resource('multi_image', MultiImageController::class);
-
-
-
+    // Multi Image for the brand 
+    Route::resource('multi_image', MultiImageController::class);
+});
 
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-
-    $users = User::all();
-    return view('dashboard')->with('users', $users);
+    // $users = User::all();
+    return view('admin.index');
 })->name('dashboard');
