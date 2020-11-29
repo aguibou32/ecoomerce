@@ -61,15 +61,13 @@
                   </div>
                 </div>
                 <div class="card-body p-5">
-                    
                     <x-jet-validation-errors class="mb-4 text text-danger" />
-                   
                   <h4 class="text-dark mb-5">Sign Up</h4>
                   <form method="POST" action="{{ route('register') }}">
                     @csrf
                     <div class="row">
                       <div class="form-group col-md-12 mb-4">
-                        <input type="text" class="form-control input-lg" name="name" value="{{ old('name') }}" required autofocus />
+                        <input type="text" class="form-control input-lg" name="name" value="{{ old('name') }}" required autofocus / placeholder="Name">
                       </div>
                       <div class="form-group col-md-12 mb-4">
                         <input type="email" class="form-control input-lg" id="email" name="email" value="{{ old('email') }}" aria-describedby="emailHelp" placeholder="Email">
